@@ -1,4 +1,4 @@
-# JSON Expan Plugin for Craft CMS
+# JSON Expand Plugin for Craft CMS
 
 A simple twig extension that returns your object or array of objects as JSON
 
