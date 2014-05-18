@@ -15,11 +15,13 @@ you can use this in any template like so
 
 ### Action Url
 
-you can also call up all the elements in a section direction by using the action url
+you can also call up all the elements in a section directly by using the action url
 
     /actions/jsonExpand/sections/query?sectionId=4
 
-where the sectionId the id of the section whose entries you want to grab
+where the sectionId the id of the section whose entries you want to grab.
+
+Hope to add more filtering options to the action urls shortly.
 
 ## TODO
 
