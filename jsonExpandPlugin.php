@@ -38,8 +38,8 @@ class JsonExpandPlugin extends BasePlugin
 	 */
 	public function addTwigExtension()
 	{
-		Craft::import('plugins.jsonexpand.twigextensions.JSONExpandTwigExtension');
-		return new JSONExpandTwigExtension();
+		Craft::import('plugins.jsonexpand.twigextensions.JsonExpandTwigExtension');
+		return new JsonExpandTwigExtension();
 	}
 
 	public function init() {
@@ -47,6 +47,5 @@ class JsonExpandPlugin extends BasePlugin
 		craft()->log->removeRoute('ProfileLogRoute');
 		parent::init();
 	}
-
 
 }

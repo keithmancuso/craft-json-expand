@@ -20,11 +20,12 @@ class JsonExpandService extends BaseApplicationComponent {
       } else {
 
         $json = null;
-        
+
       }
 
       return $json;
     }
+
 
     private function getEntryJson($entry) {
 
