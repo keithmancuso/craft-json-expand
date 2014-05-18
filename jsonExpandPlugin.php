@@ -1,7 +1,7 @@
 <?php
 namespace Craft;
 
-class JSONExpandPlugin extends BasePlugin
+class JsonExpandPlugin extends BasePlugin
 {
 
 	/* --------------------------------------------------------------
