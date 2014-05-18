@@ -3,7 +3,30 @@ namespace Craft;
 
 class JsonExpandService extends BaseApplicationComponent {
 
-    public function getEntryJson($entry) {
+    public function getJson($content) {
+
+      if (is_array($content)) {
+
+        $json = array();
+
+        foreach ($content as $entry) {
+          $json[] = $this->getEntryJson($entry);
+        }
+
+      } elseif (is_object($content)) {
+
+        $json = $this->getEntryJson($content);
+
+      } else {
+
+        $json = null;
+        
+      }
+
+      return $json;
+    }
+
+    private function getEntryJson($entry) {
 
       $entryData = array();
       $entryData['title'] = $entry->title;
@@ -65,5 +88,6 @@ class JsonExpandService extends BaseApplicationComponent {
       return $entryData;
 
     }
+
 
 }

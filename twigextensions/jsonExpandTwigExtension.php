@@ -1,10 +1,10 @@
 <?php
 namespace Craft;
 
-class JSONExpandTwigExtension extends \Twig_Extension {
+class JsonExpandTwigExtension extends \Twig_Extension {
 
 	public function getName() {
-		return Craft::t('JSON');
+		return Craft::t('JSON Expand');
 	}
 
 	public function getFilters() {
@@ -15,21 +15,7 @@ class JSONExpandTwigExtension extends \Twig_Extension {
 
 	public function jsonExpandFilter($content) {
 
-		if (is_array($content)) {
-
-			$expandedContent = array();
-
-			foreach ($content as $entry) {
-				$expandedContent[] = craft()->jsonExpand->getEntryJson($entry);
-			}
-
-		} elseif (is_object($content)) {
-			$expandedContent = craft()->jsonExpand->getEntryJson($content);
-
-
-		} else {
-			$expandedContent = null;
-		}
+		$expandedContent = craft()->jsonExpand->getJson($content);
 
 		return JsonHelper::encode($expandedContent);
 
