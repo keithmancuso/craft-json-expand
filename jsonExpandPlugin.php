@@ -42,4 +42,11 @@ class JsonExpandPlugin extends BasePlugin
 		return new JSONExpandTwigExtension();
 	}
 
+	public function init() {
+		craft()->log->removeRoute('WebLogRoute');
+		craft()->log->removeRoute('ProfileLogRoute');
+		parent::init();
+	}
+
+
 }
