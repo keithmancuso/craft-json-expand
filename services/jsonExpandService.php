@@ -30,7 +30,14 @@ class JsonExpandService extends BaseApplicationComponent {
     private function getEntryJson($entry) {
 
       $entryData = array();
+
+
+      $entryData = $entry->getAttributes();
+
       $entryData['title'] = $entry->title;
+
+
+
 
       foreach ($entry->getType()->getFieldLayout()->getFields() as $field) {
 
@@ -42,8 +49,12 @@ class JsonExpandService extends BaseApplicationComponent {
           $value = array_merge((array)$value);
         }
 
+
+
+        // gets all the default attributes from the element
+
         // check if its a relational field type
-        if ( $field['type'] == 'Categories' || $field['type'] == 'Users' || $field['type'] == 'Assets' || $field['type'] == 'Entries' || $field['type'] == 'Matrix'  ) {
+        if ( $field['type'] == 'Categories' || $field['type'] == 'Users'  || $field['type'] == 'Assets' || $field['type'] == 'Entries' || $field['type'] == 'Matrix'  ) {
 
           // for each related element
           foreach ($value as $relatedElement) {
@@ -53,11 +64,26 @@ class JsonExpandService extends BaseApplicationComponent {
             // gets all the default attributes from the element
             $relatedArray = $relatedElement->getAttributes();
 
+            $relatedArray['title'] = $relatedElement->title;
+
             // setup switch for fieldtype specific further customizations
             switch ($field['type']) {
               case 'Assets':
                 $relatedArray['url'] = $relatedElement->url;
+
+                $thumbTransform = array('mode'=>'fit', 'width'=>'100');
+                $relatedArray['thumbnail'] = $relatedElement->setTransform($thumbTransform)->url;
                 break;
+
+              case 'Matrix':
+                $relatedArray['type'] = $relatedElement->type;
+                break;
+
+              case 'Matrix':
+                $relatedArray['type'] = $relatedElement->type;
+                break;
+
+
 
              }
 
@@ -80,9 +106,17 @@ class JsonExpandService extends BaseApplicationComponent {
           }
 
 
+
+
         } else {
           // just set the field value to the field
-          $entryData[$handle] = $value;
+
+
+            $entryData[$handle] = $value;
+          
+
+
+          //echo $field['type'];
         }
       }
 
