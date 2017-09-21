@@ -98,7 +98,12 @@ class JsonExpandService extends BaseApplicationComponent {
                   $subValue = array_merge((array)$subValue);
               }
 
-              $relatedArray[$subHandle] = $subValue;
+              if($subField['type'] == "RichText") {
+                // Rich Text field values need to be converted to a string
+                $relatedArray[$subHandle] = (string)$subValue;
+              } else {
+                $relatedArray[$subHandle] = $subValue;
+              }
 
             }
             // add the item to the fields array
@@ -108,12 +113,17 @@ class JsonExpandService extends BaseApplicationComponent {
 
 
 
+        } else if($field['type'] == "RichText") {
+
+          // Rich Text field values need to be converted to a string
+          $entryData[$handle] = (string)$value;
+
         } else {
           // just set the field value to the field
 
 
             $entryData[$handle] = $value;
-          
+
 
 
           //echo $field['type'];
